@@ -8,6 +8,19 @@ class QuadTree {
   type Section = (Coords, Color)
   type BitMap = List[List[Int]]
 
+
+  def isSameColor4(lst2d: List[List[Int]]):Boolean = {
+
+    @tailrec
+    def isSameColor[A](lst: List[A]): Boolean = {
+      lst match {
+        case List() => true
+        case List(h) => true
+        case h :: t => h == t.head && isSameColor(t)
+      }
+    }
+    isSameColor(lst2d map (x=>isSameColor(x)))
+  }
   @tailrec
   private def isSameColor2D(lst: List[List[Int]]): Boolean = {
 
@@ -26,9 +39,31 @@ class QuadTree {
       case h :: t => isSameColor(h) == isSameColor(t.head) && isSameColor2D(t)
     }
   }
-
   //list.length = altura
   //list.head.length = comprimento
+
+  def makeQTreeOG(b: BitMap): QTree[Coords] = {
+
+    def divide(lst: List[List[Int]], x1: Int, y1: Int, x2: Int, y2: Int): QTree[Coords] = {
+      val altura = lst.length
+      val comprimento = lst.head.length
+      if (lst.isEmpty) QEmpty
+      else if (isSameColor2D(lst)) QLeaf((((x1, y1): Point, (x2, y2): Point): Coords, lst.head.head))
+      else {
+        val topLeft = lst.slice(0, comprimento / 2)            map (x => x.slice(0, altura / 2))
+        val topRight = lst.slice(0, comprimento / 2)           map (x => x.slice(altura / 2, altura))
+        val botLeft = lst.slice(comprimento / 2, comprimento)  map (x => x.slice(0, altura / 2))
+        val botRight = lst.slice(comprimento / 2, comprimento) map (x => x.slice(altura / 2, altura))
+        QNode(((x1, y1), (x2, y2)),
+          divide(topLeft, x1, y1, x2 - comprimento / 2, y2 - altura / 2),
+          divide(topRight, x1 + comprimento / 2, y1, x2, y2 - altura / 2),
+          divide(botLeft, x1, y1 + altura / 2, x2 - comprimento / 2, y2),
+          divide(botRight, x1 + comprimento / 2, y1 + altura / 2, x2, y2))
+      }
+    }
+
+    divide(b, 0, 0, b.head.length - 1, b.length - 1)
+  }
 
   def makeQTree(b: BitMap): QTree[Coords] = {
 
@@ -37,24 +72,27 @@ class QuadTree {
       val comprimento = lst.head.length
       lst match {
         case List() => QEmpty
-        case h::t => if(isSameColor2D(lst))  QLeaf((((x1, y1): Point, (x2, y2): Point): Coords, lst.head.head))
-                      else{
-          val topLeft = lst.slice(0, comprimento / 2)            map (x => x.slice(0, altura / 2))
-          val topRight = lst.slice(0, comprimento / 2)           map (x => x.slice(altura / 2, altura))
-          val botLeft = lst.slice(comprimento / 2, comprimento)  map (x => x.slice(0, altura / 2))
-          val botRight = lst.slice(comprimento / 2, comprimento) map (x => x.slice(altura / 2, altura))
-          QNode(((x1, y1), (x2, y2)),
-            divide(topLeft, x1, y1, x2 - comprimento / 2, y2 - altura / 2),
-            divide(topRight, x1 + comprimento / 2, y1, x2, y2 - altura / 2),
-            divide(botLeft, x1, y1 + altura / 2, x2 - comprimento / 2, y2),
-            divide(botRight, x1 + comprimento / 2, y1 + altura / 2, x2, y2))
-        }
-      }
+        case _ => if (isSameColor2D(lst)) QLeaf((((x1, y1): Point, (x2, y2): Point): Coords, lst.head.head))
+                  else{
+                      val topLeft = lst.slice(0, comprimento/2)            map (x => x.slice(0, altura/2))
+                      val topRight = lst.slice(comprimento/2, comprimento)           map (x => x.slice(0, altura/2))
+                      val botLeft = lst.slice(0, comprimento/2)  map (x => x.slice(altura/2, altura))
+                      val botRight = lst.slice(comprimento/2, comprimento) map (x => x.slice(altura/2, altura))
+                      QNode(((x1, y1), (x2, y2)),
+                        divide(topLeft, x1, y1, x2 - comprimento / 2, y2 - altura / 2),
+                        divide(topRight, x1 + comprimento / 2, y1, x2, y2 - altura / 2),
+                        divide(botLeft, x1, y1 + altura / 2, x2 - comprimento / 2, y2),
+                        divide(botRight, x1 + comprimento / 2, y1 + altura / 2, x2, y2))
 
+                  }
+
+      }
     }
 
-    divide(b, 0, 0, b.head.length - 1, b.length - 1)
+    divide(b, 0, 0, b.head.length-1, b.length-1)
   }
+
+
 
   def rotateR[A](qt: QTree[A]): QTree[A] = qt match {
     case QEmpty => QEmpty
