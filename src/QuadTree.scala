@@ -49,18 +49,18 @@ class QuadTree {
         case h::t =>
           val altura = lst.length
           val comprimento = lst.head.length
-          if (isSameColor2D(lst))QLeaf(((x1, y1),(x2, y2)), lst.head.head)
-                  else{
-                        val topLeft = lst.slice(0, altura/2)          map (x => x.slice(0, comprimento/2) )
-                        val topRight = lst.slice(0, altura/2)         map (x => x.slice(comprimento/2, comprimento))
-                        val botLeft = lst.slice(altura/2,altura)      map (x => x.slice(0, comprimento/2))
-                        val botRight = lst.slice(altura/2,altura)     map (x => x.slice(comprimento/2, comprimento))
-                      QNode(((x1, y1), (x2, y2)),
-                        divide(topLeft, x1, y1, x2-math.ceil(comprimento/2f).toInt, y2-math.ceil(altura/2f).toInt),
-                        divide(topRight, x1+math.floor(comprimento/2f).toInt, y1, x2, y2-math.ceil(altura/2f).toInt),
-                        divide(botLeft, x1, y1+math.floor(altura/2f).toInt, x2-math.ceil(comprimento/2f).toInt, y2),
-                        divide(botRight, x1+math.floor(comprimento/2f).toInt, y1+math.floor(altura/2f).toInt, x2, y2))
-                  }
+          if (isSameColor2D(lst)) QLeaf(((x1, y1),(x2, y2)), lst.head.head)
+          else{
+            val topLeft = lst.slice(0, altura/2)          map (x => x.slice(0, comprimento/2) )
+            val topRight = lst.slice(0, altura/2)         map (x => x.slice(comprimento/2, comprimento))
+            val botLeft = lst.slice(altura/2,altura)      map (x => x.slice(0, comprimento/2))
+            val botRight = lst.slice(altura/2,altura)     map (x => x.slice(comprimento/2, comprimento))
+            QNode(((x1, y1), (x2, y2)),
+              divide(topLeft, x1, y1, x2-math.ceil(comprimento/2f).toInt, y2-math.ceil(altura/2f).toInt),
+              divide(topRight, x1+math.floor(comprimento/2f).toInt, y1, x2, y2-math.ceil(altura/2f).toInt),
+              divide(botLeft, x1, y1+math.floor(altura/2f).toInt, x2-math.ceil(comprimento/2f).toInt, y2),
+              divide(botRight, x1+math.floor(comprimento/2f).toInt, y1+math.floor(altura/2f).toInt, x2, y2))
+          }
       }
     }
     divide(b,0,0,b.head.length-1,b.length-1)
