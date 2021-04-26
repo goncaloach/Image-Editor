@@ -67,29 +67,39 @@ class QuadTree {
 
   def makeQTree(b: BitMap): QTree[Coords] = {
 
-    def divide(lst: List[List[Int]], x1: Int, y1: Int, x2: Int, y2: Int): QTree[Coords] = {
-      val altura = lst.length
-      val comprimento = lst.head.length
+    def divide(lst: List[List[Int]],x1: Int,y1: Int,x2: Int,y2: Int): QTree[Coords] = {
+
+
+      /*val comp1 = math.floor(comprimento/2).toInt
+      val alt1 = math.floor(altura/2).toInt
+      val comp2 = math.ceil(comprimento/2).toInt
+      val alt2 = math.ceil(altura/2).toInt*/
+
       lst match {
         case List() => QEmpty
-        case _ => if (isSameColor2D(lst)) QLeaf((((x1, y1): Point, (x2, y2): Point): Coords, lst.head.head))
+        case h::t =>
+          val altura = lst.length
+          val comprimento = lst.head.length
+          if (isSameColor2D(lst))
+            QLeaf((((x1, y1): Point, (x2, y2): Point): Coords, lst.head.head))
                   else{
-                      val topLeft = lst.slice(0, comprimento/2)            map (x => x.slice(0, altura/2))
-                      val topRight = lst.slice(comprimento/2, comprimento)           map (x => x.slice(0, altura/2))
-                      val botLeft = lst.slice(0, comprimento/2)  map (x => x.slice(altura/2, altura))
-                      val botRight = lst.slice(comprimento/2, comprimento) map (x => x.slice(altura/2, altura))
+                        val topLeft = lst.slice(0, altura/2)          map (x => x.slice(0, comprimento/2) )
+                        val topRight = lst.slice(0, altura/2)         map (x => x.slice(comprimento/2, comprimento))
+                        val botLeft = lst.slice(altura/2,altura)      map (x => x.slice(comprimento/2, comprimento))
+                        val botRight = lst.slice(altura/2,altura)     map (x => x.slice(comprimento/2, comprimento))
                       QNode(((x1, y1), (x2, y2)),
-                        divide(topLeft, x1, y1, x2 - comprimento / 2, y2 - altura / 2),
-                        divide(topRight, x1 + comprimento / 2, y1, x2, y2 - altura / 2),
-                        divide(botLeft, x1, y1 + altura / 2, x2 - comprimento / 2, y2),
-                        divide(botRight, x1 + comprimento / 2, y1 + altura / 2, x2, y2))
+                        divide(topLeft, x1,y1, (x1+x2)/2 , (y1+y2)/2),
+                        divide(topRight, (x1+x2)/2 ,y1, x2, (y1+y2)/2),
+                        divide(botLeft, x1, (y1+y2)/2, (x1+x2)/2, y2),
+                        divide(botRight, (x1+x2)/2,(y1+y2)/2, x2, y2)  )
+
 
                   }
 
       }
     }
 
-    divide(b, 0, 0, b.head.length-1, b.length-1)
+    divide(b,0,0,b.head.length-1,b.length-1)
   }
 
 
