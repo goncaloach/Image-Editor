@@ -1,12 +1,28 @@
+import QuadTree.{BitMap, Coords}
+
 import java.awt.Color
 import scala.annotation.tailrec
 
-class QuadTree {
+case class QuadTree(bitMap: BitMap) {
+
+  def makeQTree():QTree[Coords]=QuadTree.makeQTree(bitMap)
+
+  def scale[A](value:Double,qt:QTree[A]):QTree[Any]=QuadTree.scale(value,qt)
+
+  def rotateL[A](qt:QTree[A]):QTree[Any]=QuadTree.rotateL(qt)
+
+  def rotateR[A](qt:QTree[A]):QTree[Any]=QuadTree.rotateR(qt)
+}
+
+
+object QuadTree{
 
   type Point = (Int, Int)
   type Coords = (Point, Point)
   type Section = (Coords, Color)
   type BitMap = List[List[Int]]
+
+  //////////////////////////////////////////////////////////////////////////////////
 
   @tailrec
   private def isSameColor2D(lst:List[List[Int]]):Boolean={
@@ -25,21 +41,6 @@ class QuadTree {
       case h::t => isSameColor(h) == isSameColor(t.head) && h.head==t.head.head && isSameColor2D(t)
     }
   }
-
-  /* funcao errada
-  def isSameColor1(lst2d: List[List[Int]]):Boolean = {
-
-    @tailrec
-    def isSameColor[A](lst: List[A]): Boolean = {
-      lst match {
-        case List() => true
-        case List(h) => true
-        case h :: t => h == t.head && isSameColor(t)
-      }
-    }
-    isSameColor(lst2d map (x=>isSameColor(x)))
-  }*/
-
 
   def makeQTree(b: BitMap): QTree[Coords] = {
 
@@ -66,12 +67,25 @@ class QuadTree {
     divide(b,0,0,b.head.length-1,b.length-1)
   }
 
+  //////////////////////////////////////////////////////////////////////////////////
 
+  def scale[A](valor: Double, qt: QTree[A]): QTree[Any]={
 
+    def scaleCoords(valor : Double,coords: Coords):Coords={
+      val newCoords = new Coords(((valor*coords._1._1).toInt,(valor*coords._1._2).toInt):Point,
+        ((valor*coords._2._1).toInt,(valor*coords._2._2).toInt):Point)
+      newCoords
+    }
 
+    qt match {
+      case QEmpty => QEmpty
+      case QLeaf(s:Section) => QLeaf(scaleCoords(valor,s._1:Coords),s._2)
+      case QNode(root:Coords, one, two, three, four) => QNode(scaleCoords(valor,root),scale(valor,one),scale(valor,two),scale(valor,three),scale(valor,four))
 
+    }
+  }
 
-
+  //////////////////////////////////////////////////////////////////////////////////
 
   def rotateR[A](qt: QTree[A]): QTree[A] = qt match {
     case QEmpty => QEmpty
@@ -85,59 +99,46 @@ class QuadTree {
     case QNode(root, one, two, three, four) => QNode(root, rotateL(two), rotateL(four), rotateL(one), rotateL(three))
   }
 
-
-  def scale[A](valor: Double, qt: QTree[A]): QTree[Any]={
-
-    def scaleCoords(valor : Double,coords: Coords):Coords={
-      val newCoords = new Coords(((valor*coords._1._1).toInt,(valor*coords._1._2).toInt):Point,
-                                  ((valor*coords._2._1).toInt,(valor*coords._2._2).toInt):Point)
-      newCoords
-    }
-
-    qt match {
-      case QEmpty => QEmpty
-      case QLeaf(s:Section) => QLeaf(scaleCoords(valor,s._1:Coords),s._2)
-      case QNode(root:Coords, one, two, three, four) => QNode(scaleCoords(valor,root),scale(valor,one),scale(valor,two),scale(valor,three),scale(valor,four))
-
-    }
-  }
-
-
-  /* em construçao
-  private def getCoords(qt: QTree[Coords]): Coords = {
-    qt match {
-      case QNode(root, one, two, three, four) => root
-      case QLeaf(s: Section) =>
-        s match {
-          case (coords, color) => coords
-        }
-    }
-  }
-
-  private def fillList(list : List[List[Int]],coords: Coords, color : Int): List[List[Int]] ={
-    val lista = List(List())
-    fillList(lista,coords,color)
-  }
-
-  def QTreeToBitMap[A](qt: QTree[Coords]): BitMap = {
-
-    def aux(lst: List[List[Int]], coords: QTree[Coords]): List[List[Int]] = {
-      val lista = List.fill(getCoords(qt)._2._2 + 1)(List())
-        qt match {
-        case QEmpty => List(List())
-        case QNode(root, one, two, three, four) =>
-          val lista1 = aux(lista, one)
-          val lista2 = aux(lista1, two)
-          val lista3 = aux(lista2, three)
-          aux(lista3, four)
-        case QLeaf(coords: Coords) =>
-            //fillList(lista,cords,color)
-            List(List())
-
-      }
-
-    }
-  }*/
-
+  //////////////////////////////////////////////////////////////////////////////////
 
 }
+
+  //////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+
+/* em construçao
+private def getCoords(qt: QTree[Coords]): Coords = {
+  qt match {
+    case QNode(root, one, two, three, four) => root
+    case QLeaf(s: Section) =>
+      s match {
+        case (coords, color) => coords
+      }
+  }
+}
+
+private def fillList(list : List[List[Int]],coords: Coords, color : Int): List[List[Int]] ={
+  val lista = List(List())
+  fillList(lista,coords,color)
+}
+
+def QTreeToBitMap[A](qt: QTree[Coords]): BitMap = {
+
+  def aux(lst: List[List[Int]], coords: QTree[Coords]): List[List[Int]] = {
+    val lista = List.fill(getCoords(qt)._2._2 + 1)(List())
+      qt match {
+      case QEmpty => List(List())
+      case QNode(root, one, two, three, four) =>
+        val lista1 = aux(lista, one)
+        val lista2 = aux(lista1, two)
+        val lista3 = aux(lista2, three)
+        aux(lista3, four)
+      case QLeaf(coords: Coords) =>
+          //fillList(lista,cords,color)
+          List(List())
+
+    }
+
+  }
+}*/
