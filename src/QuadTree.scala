@@ -7,11 +7,13 @@ case class QuadTree(bitMap: BitMap) {
 
   def makeQTree():QTree[Coords]=QuadTree.makeQTree(bitMap)
 
-  def scale[A](value:Double,qt:QTree[A]):QTree[Any]=QuadTree.scale(value,qt)
+  def scale[A](value:Double,qt:QTree[A]):QTree[Coords]=QuadTree.scale(value,qt)
 
   def rotateL[A](qt:QTree[A]):QTree[Any]=QuadTree.rotateL(qt)
 
   def rotateR[A](qt:QTree[A]):QTree[Any]=QuadTree.rotateR(qt)
+
+  def QTreeToBitMap[A](qt: QTree[Coords]): BitMap = QuadTree.QTreeToBitMap(qt)
 }
 
 
@@ -21,8 +23,6 @@ object QuadTree{
   type Coords = (Point, Point)
   type Section = (Coords, Color)
   type BitMap = List[List[Int]]
-
-  //////////////////////////////////////////////////////////////////////////////////
 
   @tailrec
   private def isSameColor2D(lst:List[List[Int]]):Boolean={
@@ -69,7 +69,7 @@ object QuadTree{
 
   //////////////////////////////////////////////////////////////////////////////////
 
-  def scale[A](valor: Double, qt: QTree[A]): QTree[Any]={
+  def scale[A](valor: Double, qt: QTree[A]): QTree[Coords]={
 
     def scaleCoords(valor : Double,coords: Coords):Coords={
       val newCoords = new Coords(((valor*coords._1._1).toInt,(valor*coords._1._2).toInt):Point,
@@ -99,46 +99,31 @@ object QuadTree{
     case QNode(root, one, two, three, four) => QNode(root, rotateL(two), rotateL(four), rotateL(one), rotateL(three))
   }
 
-  //////////////////////////////////////////////////////////////////////////////////
-
-}
-
-  //////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
-
-
-/* em construçao
-private def getCoords(qt: QTree[Coords]): Coords = {
-  qt match {
-    case QNode(root, one, two, three, four) => root
-    case QLeaf(s: Section) =>
-      s match {
-        case (coords, color) => coords
-      }
-  }
-}
-
-private def fillList(list : List[List[Int]],coords: Coords, color : Int): List[List[Int]] ={
-  val lista = List(List())
-  fillList(lista,coords,color)
-}
-
-def QTreeToBitMap[A](qt: QTree[Coords]): BitMap = {
-
-  def aux(lst: List[List[Int]], coords: QTree[Coords]): List[List[Int]] = {
-    val lista = List.fill(getCoords(qt)._2._2 + 1)(List())
-      qt match {
-      case QEmpty => List(List())
-      case QNode(root, one, two, three, four) =>
-        val lista1 = aux(lista, one)
-        val lista2 = aux(lista1, two)
-        val lista3 = aux(lista2, three)
-        aux(lista3, four)
-      case QLeaf(coords: Coords) =>
-          //fillList(lista,cords,color)
-          List(List())
-
+  def QTreeToBitMap[A](qt: QTree[A]):BitMap = {
+    qt match{
+      case QEmpty => List()
+      case QLeaf((cords:Coords,color:Int)) =>
+        List.fill(cords._2._2 - cords._1._2 + 1)(List.fill(cords._2._1 - cords._1._1+1)(color))
+      case QNode(root,one,two,three,four) =>
+        val top = concatListH(QTreeToBitMap(one),QTreeToBitMap(two))
+        val bot = concatListH(QTreeToBitMap(three),QTreeToBitMap(four))
+        concatListV(top,bot)
     }
-
   }
-}*/
+
+  private def concatListH(lst1 : List[List[Int]],lst2:List[List[Int]]):List[List[Int]]= {
+    (lst1, lst2) match {
+      case (List(), List()) => List()
+      case (Nil, List(h2)) => List(h2)
+      case (List(h1), Nil) => List(h1)
+      case (List(h1), List(h2)) => List(h1 ::: h2)
+      case (h1 :: t1, h2 :: t2) => List(h1 ::: h2) ::: concatListH(t1,t2)
+    }
+  }
+
+  private def concatListV(list1: List[List[Int]],list2: List[List[Int]]): List[List[Int]] = {
+    list1 ::: list2
+  }
+
+}
+
