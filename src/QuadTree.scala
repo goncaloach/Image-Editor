@@ -14,6 +14,8 @@ case class QuadTree(bitMap: BitMap) {
   def rotateL[A](qt:QTree[A]):QTree[Any]=QuadTree.rotateL(qt)
 
   def rotateR[A](qt:QTree[A]):QTree[Any]=QuadTree.rotateR(qt)
+
+  def mapColourEffect[A](f:Color => Color, qt:QTree[A]):QTree[Coords]=QuadTree.mapColourEffect(f,qt)
 }
 
 object QuadTree{
@@ -50,15 +52,17 @@ object QuadTree{
         case List(List())  => QEmpty
         case List()  => QEmpty
         case h::t =>
-          val altura = lst.length
-          val comprimento = lst.head.length
           if (isSameColor2D(lst)) {
             QLeaf(((x1, y1),(x2, y2)), lst.head.head)
           } else{
+            val altura = lst.length
+            val comprimento = lst.head.length
+
             val topLeft = lst.slice(0, altura/2)          map (x => x.slice(0, comprimento/2) )
             val topRight = lst.slice(0, altura/2)         map (x => x.slice(comprimento/2, comprimento))
             val botLeft = lst.slice(altura/2,altura)      map (x => x.slice(0, comprimento/2))
             val botRight = lst.slice(altura/2,altura)     map (x => x.slice(comprimento/2, comprimento))
+
             QNode(((x1, y1), (x2, y2)),
               divide(topLeft, x1, y1, x2-math.ceil(comprimento/2f).toInt, y2-math.ceil(altura/2f).toInt),
               divide(topRight, x1+math.floor(comprimento/2f).toInt, y1, x2, y2-math.ceil(altura/2f).toInt),
@@ -77,7 +81,7 @@ object QuadTree{
       case QEmpty => Nil
       case QLeaf((cords:Coords,color:Int)) =>
         List.fill(cords._2._2 - cords._1._2 + 1)(List.fill(cords._2._1 - cords._1._1+1)(color))
-      case QNode(root,one,two,three,four) =>
+      case QNode(_,one,two,three,four) =>
         val top = concatListH(QTreeToBitMap(one),QTreeToBitMap(two))
         val bot = concatListH(QTreeToBitMap(three),QTreeToBitMap(four))
         concatListV(top,bot)
@@ -89,7 +93,6 @@ object QuadTree{
       case (List(), List()) => List()
       case (Nil, List(h2)) => List(h2)
       case (List(h1), Nil) => List(h1)
-      //case (List(h1), List(h2)) => List(h1 ::: h2)
       case (h1 :: t1, h2 :: t2) => List(h1 ::: h2) ::: concatListH(t1,t2)
     }
   }
@@ -136,6 +139,19 @@ object QuadTree{
     case QLeaf(value) => QLeaf(value)
     case QNode(root, one, two, three, four) => QNode(root, rotateL(two), rotateL(four), rotateL(one), rotateL(three))
   }
+
+  def mapColourEffect[A](f:Color => Color, qt:QTree[A]):QTree[Coords]={
+    qt match {
+      case QEmpty => QEmpty
+      case QLeaf((cords : Coords,cor:Int)) => QLeaf(cords,f)
+      case QNode(_,one,two,three,four) =>
+        mapColourEffect(f,one)
+        mapColourEffect(f,two)
+        mapColourEffect(f,three)
+        mapColourEffect(f,four)
+    }
+  }
+
 
 
 
