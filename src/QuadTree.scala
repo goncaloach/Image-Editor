@@ -50,7 +50,6 @@ object QuadTree{
   }
 
   def makeQTree(b: BitMap): QTree[Coords] = {
-
     def divide(lst: List[List[Int]],x1: Int,y1: Int,x2: Int,y2: Int): QTree[Coords] = {
       lst match {
         case List(List())  => QEmpty
@@ -112,13 +111,11 @@ object QuadTree{
       val comprimento = (coords._2._1 - coords._1._1 + 1)*valor.toInt
       new Coords((coords._1._1*valor.toInt,coords._1._2*valor.toInt),(coords._2._1*valor.toInt+comprimento-1,coords._2._2*valor.toInt+altura-1))
     }
-
     /*def scaleCoords(valor : Double,coords: Coords):Coords={
       val newCoords = new Coords(((valor*coords._1._1).toInt,(valor*coords._1._2).toInt):Point,
         ((valor*coords._2._1).toInt,(valor*coords._2._2).toInt):Point)
       newCoords
     }*/
-
 
     qt match {
       case QEmpty => QEmpty
@@ -130,16 +127,45 @@ object QuadTree{
 
   //////////////////////////////////////////////////////////////////////////////////
 
-  def rotateR[A](qt: QTree[A]): QTree[Coords] = {
+  private def changeCoordsQT(cords:Coords,alt:Int,larg:Int):Coords = {
+    val x1 = cords._1._1
+    val y1 = cords._1._2
+    val x2 = cords._2._1
+    val y2 = cords._2._2
+    ((y1, x1 - larg), (y2, x2 - larg))
+  }
+
+  private def getCompQT[A](qt:QTree[A]):Int={
     qt match {
-      case QEmpty => QEmpty
-      case QLeaf(value) => QLeaf(value)
-      case QNode(root:Coords, one, two, three, four) =>
-        QNode(root:Coords, rotateR(three), rotateR(one), rotateR(four), rotateR(two))
+      case QEmpty=> 0
+      case QLeaf(cords: Coords) => cords._2._1+1
+      case QNode(cords:Coords,_,_,_,_)=> cords._2._1+1
     }
   }
 
-  def rotateL[A](qt: QTree[A]): QTree[Coords] = {
+  private def getAltQT[A](qt:QTree[A]):Int={
+    qt match {
+      case QEmpty=> 0
+      case QLeaf(cords: Coords) => cords._2._2+1
+      case QNode(cords:Coords,_,_,_,_)=> cords._2._2+1
+    }
+  }
+
+  def rotateR[A](qt: QTree[A]): QTree[Coords] = {
+    val larg = getCompQT(qt)
+    val alt = getAltQT(qt)
+    def aux[A](q: QTree[A]): QTree[Coords] = {
+      q match {
+        case QEmpty => QEmpty
+        case QLeaf((cords: Coords, color: Int)) => QLeaf((changeCoordsQT(cords,larg,alt), color: Int))
+        case QNode(root: Coords, one, two, three, four) =>
+          QNode(changeCoordsQT(root,larg,alt), aux(three), aux(one), aux(four), aux(two))
+      }
+    }
+    aux(qt)
+  }
+
+  def rotateL[A](qt: QTree[A]): QTree[Coords] = {  //not done
     qt match {
       case QEmpty => QEmpty
       case QLeaf(value) => QLeaf(value)
@@ -150,7 +176,7 @@ object QuadTree{
 
   ////////////////////////////////////////////////////////////////////////////////////
 
-  def mapColourEffect[A](f:Color => Color, qt:QTree[A]):QTree[Coords]={
+  private def mapColourEffect[A](f:Color => Color, qt:QTree[A]):QTree[Coords]={
     qt match {
       case QEmpty => QEmpty
       case QLeaf((cords : Coords,cor:Int)) => QLeaf(cords,f(HCtoColor(cor)).hashCode())
@@ -159,18 +185,18 @@ object QuadTree{
     }
   }
 
-  def mapColourEffect_1[A](rndm: RandomWithState, f:(Color,RandomWithState) => (Color,RandomWithState), qt:QTree[A]):(QTree[Coords],RandomWithState)={
-    val next = rndm.nextInt(2)
-    val next1 = next._2.nextInt(234)
-    val next2 = next1._2.nextInt(5685678)
-    val next3 = next2._2.nextInt(234764)
+  private def mapColourEffect_1[A](rndm: RandomWithState, f:(Color,RandomWithState) => (Color,RandomWithState), qt:QTree[A]):(QTree[Coords],RandomWithState)={
+    val next = MyRandom(rndm.nextInt._1)
+    val next1 = MyRandom(next.nextInt._1)
+    val next2 = MyRandom(next1.nextInt._1)
+    val next3 = MyRandom(next2.nextInt._1)
     qt match {
       case QEmpty => (QEmpty,rndm)
       case QLeaf((cords : Coords,cor:Int)) =>
-        val res:(Color,RandomWithState) = f(HCtoColor(cor),next._2)
+        val res:(Color,RandomWithState) = f(HCtoColor(cor),next.nextInt._2)
         (QLeaf(cords,res._1.hashCode()),res._2)
-      case QNode(root:Coords,one,two,three,four) => (QNode(root,mapColourEffect_1(next._2,f,one)._1, mapColourEffect_1(next1._2,f,two)._1,
-        mapColourEffect_1(next2._2,f,three)._1, mapColourEffect_1(next3._2,f,four)._1),rndm)
+      case QNode(root:Coords,one,two,three,four) => (QNode(root,mapColourEffect_1(next.nextInt._2,f,one)._1, mapColourEffect_1(next1.nextInt._2,f,two)._1,
+        mapColourEffect_1(next2.nextInt._2,f,three)._1, mapColourEffect_1(next3.nextInt._2,f,four)._1),rndm)
     }
   }
 
@@ -179,7 +205,7 @@ object QuadTree{
     new Color(lst.head,lst.tail.head,lst.last)
   }
 
-  private def truncate(valor : Int):Int={
+  private def truncate(valor : Int):Int={  //truncate color from 0 to 255
     Math.max(Math.min(255,valor),0)
   }
 
@@ -193,7 +219,7 @@ object QuadTree{
     new Color(newRed,newGreen,newBlue)
   }
 
-  private def contrastEffect(clr : Color):Color={ //falta mudar o 128 para parametro de entrada
+  private def contrastEffect(clr : Color):Color={ //128 como parametro de entrada
     def factor(contrast : Int):Int={
       (259 * (contrast + 255)) / (255 * (259 - contrast))
     }

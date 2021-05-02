@@ -1,3 +1,5 @@
+import QuadTree.Coords
+
 import java.awt.Color
 
 object Main {
@@ -13,13 +15,20 @@ object Main {
     //val scaled = quad.scale(2,qt)
     //println(scaled)
 
+    val rotateR = quad.rotateR(qt)
+
     //val sepia = quad.applySepia(qt)
     //val contrast = quad.applyContrast(qt)
     //val noise = quad.applyNoise(qt)
-    val noisePure = quad.applyNoisePure(qt)
+    //val noisePure = quad.applyNoisePure(qt)
 
 
-    val bm = quad.QTreeToBitMap(noisePure)
+
+
+
+
+
+    val bm = quad.QTreeToBitMap(rotateR)
     ImageUtil.writeImage(bm.toArray map (x=> x.toArray),"output.png","png")
 
 
