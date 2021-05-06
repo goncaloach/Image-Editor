@@ -57,7 +57,6 @@ object QuadTree{
 
   def makeQTree(b: BitMap): QTree[Coords] = {
     def divide(lst: List[List[Int]],x1: Int,y1: Int,x2: Int,y2: Int): QTree[Coords] = {
-      println(lst)
       lst match {
         case List(List())  => QEmpty
         case List(List(), List())  => QEmpty
@@ -96,15 +95,13 @@ object QuadTree{
   }
 
   private def concatListH(lst1 : List[List[Int]],lst2:List[List[Int]]):List[List[Int]]= {
-    println("list 1"+lst1)
-    println("list2 " +lst2)
     (lst1, lst2) match {
-      case (List(), List()) => List()
-      case (Nil, List(h2)) => List(h2)
-      case (List(h1), Nil) => List(h1)
+      case (Nil, Nil) => Nil
+      case (Nil, lst2) => lst2
+      case (lst1, Nil) => lst1
       case (h1 :: t1, h2 :: t2) => List(h1 ::: h2) ::: concatListH(t1,t2)
     }
-  }
+}
 
   private def concatListV(list1: List[List[Int]],list2: List[List[Int]]): List[List[Int]] = {
     list1 ::: list2
@@ -112,30 +109,34 @@ object QuadTree{
 
   //////////////////////////////////////////// T2 //////////////////////////////////////////////
 
-  def scale[A](valor: Double, qt: QTree[A]): QTree[Coords]={
-
-    def scaleCoords(valor : Double,coords: Coords):Coords={
-      val altura = (coords._2._2 - coords._1._2 + 1)*valor.toInt
-      val comprimento = (coords._2._1 - coords._1._1 + 1)*valor.toInt
-      new Coords((coords._1._1*valor.toInt,coords._1._2*valor.toInt),(coords._2._1*valor.toInt+comprimento-1,coords._2._2*valor.toInt+altura-1))
+  private def scaleUp[A](valor: Double, qt:QTree[A]): QTree[Coords]={
+    def scaleUpCoords(valor : Double,cords: Coords):Coords={
+      new Coords((cords._1._1*valor.toInt,cords._1._2*valor.toInt),
+                (((cords._2._1+1)*valor).toInt -1,((cords._2._2+1)*valor).toInt -1))
     }
-    /*def scaleCoords(valor : Double,coords: Coords):Coords={
-      val newCoords = new Coords(((valor*coords._1._1).toInt,(valor*coords._1._2).toInt):Point,
-        ((valor*coords._2._1).toInt,(valor*coords._2._2).toInt):Point)
-      newCoords
-    }*/
-
     qt match {
       case QEmpty => QEmpty
-      case QLeaf((cords : Coords,cor:Int)) => QLeaf(scaleCoords(valor,cords),cor)
-      case QNode(root:Coords, one, two, three, four) => QNode(scaleCoords(valor,root),scale(valor,one),scale(valor,two),scale(valor,three),scale(valor,four))
-
+      case QLeaf((cords: Coords, cor: Int)) => QLeaf(scaleUpCoords(valor, cords), cor)
+      case QNode(root: Coords, one, two, three, four) =>
+        QNode(scaleUpCoords(valor, root), scaleUp(valor, one), scaleUp(valor, two), scaleUp(valor, three), scaleUp(valor, four))
     }
   }
 
+  /*def scaleDown[A](valor: Double, qt: QTree[A]): QTree[Coords]={
+
+  }*/
+
+  def scale[A](valor: Double, qt: QTree[A]): QTree[Coords]={
+    if(valor>=1) scaleUp(valor,qt)
+    else scaleUp(valor,qt)
+    //else scaleDown(valor,qt)
+  }
+
+
+
   /////////////////////////////////////////// T3,T4 ///////////////////////////////////////
 
-  private def getAltQT[A](qt:QTree[A]):Int={
+  private def getAltQT[A](qt:QTree[A]):Int={   //Get QTree Height
     qt match {
       case QEmpty=>0
       case QLeaf((cords:Coords,_)) => cords._2._2
@@ -143,7 +144,7 @@ object QuadTree{
     }
   }
 
-  private def getCompQT[A](qt:QTree[A]):Int={
+  private def getCompQT[A](qt:QTree[A]):Int={   //Get QTree Width
     qt match {
       case QEmpty=>0
       case QLeaf((cords:Coords,_)) => cords._2._1
@@ -329,4 +330,3 @@ object QuadTree{
   }
 
 }
-
