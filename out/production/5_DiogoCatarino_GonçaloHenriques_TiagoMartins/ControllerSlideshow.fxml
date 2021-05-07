@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="453.0" prefWidth="636.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerSlideshow">
+   <children>
+      <ImageView fx:id="img" fitHeight="469.0" fitWidth="708.0" layoutX="6.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/add.png" />
+         </image>
+      </ImageView>
+      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="636.0">
+        <menus>
+            <Menu mnemonicParsing="false" text="File">
+              <items>
+                  <MenuItem fx:id="newimage" mnemonicParsing="false" onAction="#loadImage" text="New" />
+                <MenuItem fx:id="save" mnemonicParsing="false" onAction="#saveImage" text="Save" />
+                  <MenuItem fx:id="removeview" mnemonicParsing="false" onAction="#removeFromGallery" text="Remove from Gallery" />
+              </items>
+            </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+                  <MenuItem fx:id="scale" mnemonicParsing="false" onAction="#scale" text="Scale" />
+              <MenuItem fx:id="rotateleft" mnemonicParsing="false" onAction="#rotateLeft" text="Rotate Left" />
+                  <MenuItem fx:id="rotateright" mnemonicParsing="false" onAction="#rotateRight" text="Rotate Right" />
+                  <MenuItem fx:id="mirrorh" mnemonicParsing="false" onAction="#mirrorH" text="Mirror Horizontally" />
+                  <MenuItem fx:id="mirrorv" mnemonicParsing="false" onAction="#mirrorV" text="Mirror Vertically" />
+                  <MenuItem fx:id="sepia" mnemonicParsing="false" onAction="#sepia" text="Sepia Effect" />
+                  <MenuItem fx:id="contrast" mnemonicParsing="false" onAction="#contrast" text="Contrast Effect" />
+                  <MenuItem fx:id="graynoise" mnemonicParsing="false" onAction="#grayNoise" text="Gray Noise Effect" />
+                  <MenuItem fx:id="colornoise" mnemonicParsing="false" onAction="#colorNoise" text="Color Noise Effect" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <Button fx:id="button1" layoutX="14.0" layoutY="219.0" mnemonicParsing="false" onMouseClicked="#onButton1Clicked" onMouseEntered="#overButton1" onMouseExited="#leftButton1" opacity="0.0" text="&lt;">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+      <Button fx:id="button2" layoutX="585.0" layoutY="219.0" mnemonicParsing="false" onMouseClicked="#onButton2Clicked" onMouseEntered="#overButton2" onMouseExited="#leftButton2" opacity="0.0" prefHeight="39.0" prefWidth="37.0" text="&gt;">
+         <font>
+            <Font size="18.0" />
+         </font></Button>
+   </children>
+</AnchorPane>
