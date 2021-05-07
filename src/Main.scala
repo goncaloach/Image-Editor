@@ -3,7 +3,7 @@ object Main {
 
   def main(args: Array[String]): Unit = {
 
-    val nomeFicheiro = "lul"
+    val nomeFicheiro = "Barack_Obama"
     val quad = new QuadTree(Utils.readImage(nomeFicheiro))
     //println(quad)
     val qt = quad.makeQTree()
@@ -16,13 +16,14 @@ object Main {
     //val mirrorV = quad.mirrorV(qt)
 
     //val rotateR = quad.rotateR(qt)
-    val rotateL = quad.rotateL(qt)
+    //val rotateL = quad.rotateL(qt)
 
     //val sepia = quad.applySepia(qt)
     //val contrast = quad.applyContrast(qt,256)
     //val noise = quad.applyNoise(qt)
     //val noisePure = quad.applyNoisePure(qt)
-    Utils.saveImageOutput(rotateL,quad)
+
+    Utils.saveImageOutput(qt,quad)
   }
 
 }

@@ -92,4 +92,6 @@ class ControllerSlideshow {
     val selectedFile: File = fileChooser.showOpenDialog(stage)*/
   }
 
+  def saveImage():Unit={}
+
 }
