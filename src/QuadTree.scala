@@ -269,6 +269,8 @@ object QuadTree{
     Math.max(Math.min(255,valor),0)
   }
 
+
+
   private def sepiaEffect(clr : Color):Color={
     val red = clr.getRed
     val green = clr.getGreen
@@ -280,12 +282,15 @@ object QuadTree{
   }
 
   private def contrastEffect(value:Int)(clr : Color):Color={
+    def truncateContrast(valor : Int):Int={  //truncate color from -255 to 255
+      Math.max(Math.min(255,valor),-255)
+    }
     def factor(contrast : Int):Int={
       (259 * (contrast + 255)) / (255 * (259 - contrast))
     }
-    val newRed   = truncate(factor(value) * (clr.getRed   - 128) + 128)
-    val newGreen = truncate(factor(value) * (clr.getGreen - 128) + 128)
-    val newBlue  = truncate(factor(value) * (clr.getBlue  - 128) + 128)
+    val newRed   = truncate(factor(truncateContrast(value)) * (clr.getRed   - 128) + 128)
+    val newGreen = truncate(factor(truncateContrast(value)) * (clr.getGreen - 128) + 128)
+    val newBlue  = truncate(factor(truncateContrast(value)) * (clr.getBlue  - 128) + 128)
     new Color(newRed,newGreen,newBlue)
   }
 

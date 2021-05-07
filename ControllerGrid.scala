@@ -1,7 +1,13 @@
-import javafx.fxml.{FXML}
-
-import javafx.scene.control.{Button,MenuButton, MenuItem}
+import BE.QuadTree
+import BE.{QTree, QuadTree}
+import BE.QuadTree.Coords
+import javafx.fxml.{FXML, FXMLLoader}
+import javafx.scene.{Parent, Scene}
+import javafx.scene.control.{Button, ComboBox, MenuButton, MenuItem}
 import javafx.scene.image.{Image, ImageView}
+import javafx.scene.input.MouseEvent
+import javafx.scene.layout.{AnchorPane, VBox}
+import javafx.stage.{FileChooser, Stage}
 
 import javax.swing.JOptionPane
 class ControllerGrid {
@@ -94,6 +100,7 @@ class ControllerGrid {
   }
 
   def rotateR(path:String):QuadTree.BitMap={
+    println("entrei" + path)
     val quad = new QuadTree(ImageUtil.readColorImage("src/"+path).toList map (x=> x.toList))
     val qt = quad.makeQTree()
     val effect = quad.rotateR(qt)
@@ -192,14 +199,14 @@ class ControllerGrid {
   }
   def applyRotateR1(): Unit ={
     val path= img1.getImage.impl_getUrl().toString.substring(img1.getImage.impl_getUrl().toString.length - 12)
-    println(path)
+    println("entrei" +path)
     val newQT = rotateR(path)
     val numberPath = path.substring(7)
     val newPath = "file:src/Images/modified_"+numberPath
     var newImage: Image = new Image(newPath)
     img1.setImage(newImage)
-    Utils.deleteFile(newPath)
-    ImageUtil.writeImage(newQT.toArray map (x=> x.toArray),"src/"+path,"png")
+    //Utils.deleteFile(newPath)
+    //ImageUtil.writeImage(newQT.toArray map (x=> x.toArray),"src/"+path,"png")
   }
   def applyRotateL1(): Unit ={
     val path= img1.getImage.impl_getUrl().toString.substring(img1.getImage.impl_getUrl().toString.length - 12)
@@ -520,14 +527,14 @@ class ControllerGrid {
     }
   }
   def loadButton9(): Unit = {
-    val path: String = JOptionPane.showInputDialog("Search (from 1 to 9)")
-    var newImage: Image = new Image("Images/" + path + ".png")
-    button9.visibleProperty().setValue(false)
-    img9.visibleProperty().setValue(true)
-    remove9.visibleProperty().setValue(true)
-    menu9.visibleProperty().setValue(true)
-    img9.setImage(newImage)
-  }
+      val path: String = JOptionPane.showInputDialog("Search (from 1 to 9)")
+      var newImage: Image = new Image("Images/" + path + ".png")
+      button9.visibleProperty().setValue(false)
+      img9.visibleProperty().setValue(true)
+      remove9.visibleProperty().setValue(true)
+      menu9.visibleProperty().setValue(true)
+      img9.setImage(newImage)
+    }
 
 
 

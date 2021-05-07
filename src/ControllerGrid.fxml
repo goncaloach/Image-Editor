@@ -5,150 +5,151 @@
 <?import javafx.scene.layout.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerGrid">
-   <children>
-      <ScrollPane prefHeight="400.0" prefWidth="602.0">
-         <content>
-            <GridPane gridLinesVisible="true" prefHeight="398.0" prefWidth="601.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <ImageView fx:id="img9" fitHeight="95.0" fitWidth="183.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <ImageView fx:id="img1" fitHeight="130.0" fitWidth="197.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" />
-                  <ImageView fx:id="img2" fitHeight="100.0" fitWidth="194.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" />
-                  <ImageView fx:id="img3" fitHeight="136.0" fitWidth="171.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" />
-                  <ImageView fx:id="img5" fitHeight="133.0" fitWidth="200.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ImageView fx:id="img4" fitHeight="133.0" fitWidth="200.0" layoutX="10.0" layoutY="143.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="1" />
-                  <ImageView fx:id="img6" fitHeight="126.0" fitWidth="200.0" layoutX="10.0" layoutY="143.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <ImageView fx:id="img7" fitHeight="133.0" fitWidth="200.0" layoutX="411.0" layoutY="143.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="2" />
-                  <ImageView fx:id="img8" fitHeight="133.0" fitWidth="200.0" layoutX="10.0" layoutY="276.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button fx:id="button1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#loadButton1" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" />
-                  <Button fx:id="button9" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton9" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                  <Button fx:id="button8" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton8" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Button fx:id="button7" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton7" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.rowIndex="2" />
-                  <Button fx:id="button6" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton6" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <Button fx:id="button5" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton5" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Button fx:id="button4" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton4" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.rowIndex="1" />
-                  <Button fx:id="button3" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton3" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" />
-                  <Button fx:id="button2" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton2" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" />
-                  <Button fx:id="remove1" alignment="BOTTOM_LEFT" contentDisplay="TOP" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#removeImg1" text="X" visible="false" GridPane.valignment="TOP" />
-                  <Button fx:id="remove2" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg2" text="X" visible="false" GridPane.columnIndex="1" GridPane.valignment="TOP" />
-                  <Button fx:id="remove3" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg3" text="X" visible="false" GridPane.columnIndex="2" GridPane.valignment="TOP" />
-                  <Button fx:id="remove4" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg4" text="X" visible="false" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <Button fx:id="remove5" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg5" text="X" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <Button fx:id="remove6" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg6" text="X" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP" />
-                  <Button fx:id="remove7" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg7" text="X" visible="false" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-                  <Button fx:id="remove8" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg8" text="X" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-                  <Button fx:id="remove9" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg9" text="X" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-                  <MenuButton fx:id="menu1" mnemonicParsing="false" text="Edit" visible="false" GridPane.valignment="BOTTOM">
-                    <items>
-                      <MenuItem fx:id="menurl1" mnemonicParsing="false" text="Rotate Right" />
-                      <MenuItem fx:id="menurl1" mnemonicParsing="false" text="Rotate Left" />
-                        <MenuItem fx:id="menuscale1" mnemonicParsing="false" text="Scale" />
-                        <MenuItem fx:id="menumh1" mnemonicParsing="false" text="Mirror Horizontal" />
-                        <MenuItem fx:id="menumv1" mnemonicParsing="false" text="Mirror Vertical" />
-                        <MenuItem fx:id="menusepia1" mnemonicParsing="false" text="Sepia" />
-                        <MenuItem fx:id="menunoise1" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                    </items>
-                  </MenuButton>
-                  <MenuButton fx:id="menu2" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
-                     <items>
-                        <MenuItem fx:id="menurl2" mnemonicParsing="false" text="Rotate Right" />
-                        <MenuItem fx:id="menurl2" mnemonicParsing="false" text="Rotate Left" />
-                        <MenuItem fx:id="menuscale2" mnemonicParsing="false" text="Scale" />
-                        <MenuItem fx:id="menumh2" mnemonicParsing="false" text="Mirror Horizontal" />
-                        <MenuItem fx:id="menumv2" mnemonicParsing="false" text="Mirror Vertical" />
-                        <MenuItem fx:id="menusepia2" mnemonicParsing="false" text="Sepia" />
-                        <MenuItem fx:id="menunoise2" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                     </items>
-                  </MenuButton>
-                  <MenuButton fx:id="menu3" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
-                      <items>
-                          <MenuItem fx:id="menurl3" mnemonicParsing="false" text="Rotate Right" />
-                          <MenuItem fx:id="menurl3" mnemonicParsing="false" text="Rotate Left" />
-                          <MenuItem fx:id="menuscale3" mnemonicParsing="false" text="Scale" />
-                          <MenuItem fx:id="menumh3" mnemonicParsing="false" text="Mirror Horizontal" />
-                          <MenuItem fx:id="menumv3" mnemonicParsing="false" text="Mirror Vertical" />
-                          <MenuItem fx:id="menusepia3" mnemonicParsing="false" text="Sepia" />
-                          <MenuItem fx:id="menunoise3" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                      </items>
-                  </MenuButton>
-                  <MenuButton fx:id="menu4" mnemonicParsing="false" text="Edit" visible="false" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                      <items>
-                          <MenuItem fx:id="menurl4" mnemonicParsing="false" text="Rotate Right" />
-                          <MenuItem fx:id="menurl4" mnemonicParsing="false" text="Rotate Left" />
-                          <MenuItem fx:id="menuscale4" mnemonicParsing="false" text="Scale" />
-                          <MenuItem fx:id="menumh4" mnemonicParsing="false" text="Mirror Horizontal" />
-                          <MenuItem fx:id="menumv4" mnemonicParsing="false" text="Mirror Vertical" />
-                          <MenuItem fx:id="menusepia4" mnemonicParsing="false" text="Sepia" />
-                          <MenuItem fx:id="menunoise4" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                      </items>
-                  </MenuButton>
-                  <MenuButton fx:id="menu5" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                      <items>
-                          <MenuItem fx:id="menurl5" mnemonicParsing="false" text="Rotate Right" />
-                          <MenuItem fx:id="menurl5" mnemonicParsing="false" text="Rotate Left" />
-                          <MenuItem fx:id="menuscale5" mnemonicParsing="false" text="Scale" />
-                          <MenuItem fx:id="menumh5" mnemonicParsing="false" text="Mirror Horizontal" />
-                          <MenuItem fx:id="menumv5" mnemonicParsing="false" text="Mirror Vertical" />
-                          <MenuItem fx:id="menusepia5" mnemonicParsing="false" text="Sepia" />
-                          <MenuItem fx:id="menunoise5" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                      </items>
-                  </MenuButton>
-                  <MenuButton fx:id="menu6" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
-                      <items>
-                          <MenuItem fx:id="menurl6" mnemonicParsing="false" text="Rotate Right" />
-                          <MenuItem fx:id="menurl6" mnemonicParsing="false" text="Rotate Left" />
-                          <MenuItem fx:id="menuscale6" mnemonicParsing="false" text="Scale" />
-                          <MenuItem fx:id="menumh6" mnemonicParsing="false" text="Mirror Horizontal" />
-                          <MenuItem fx:id="menumv6" mnemonicParsing="false" text="Mirror Vertical" />
-                          <MenuItem fx:id="menusepia6" mnemonicParsing="false" text="Sepia" />
-                          <MenuItem fx:id="menunoise6" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                      </items>
-                  </MenuButton>
-                  <MenuButton fx:id="menu7" mnemonicParsing="false" text="Edit" visible="false" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-                      <items>
-                          <MenuItem fx:id="menurl7" mnemonicParsing="false" text="Rotate Right" />
-                          <MenuItem fx:id="menurl7" mnemonicParsing="false" text="Rotate Left" />
-                          <MenuItem fx:id="menuscale7" mnemonicParsing="false" text="Scale" />
-                          <MenuItem fx:id="menumh7" mnemonicParsing="false" text="Mirror Horizontal" />
-                          <MenuItem fx:id="menumv7" mnemonicParsing="false" text="Mirror Vertical" />
-                          <MenuItem fx:id="menusepia7" mnemonicParsing="false" text="Sepia" />
-                          <MenuItem fx:id="menunoise7" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                      </items>
-                  </MenuButton>
-                  <MenuButton fx:id="menu8" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-                      <items>
-                          <MenuItem fx:id="menurl8" mnemonicParsing="false" text="Rotate Right" />
-                          <MenuItem fx:id="menurl8" mnemonicParsing="false" text="Rotate Left" />
-                          <MenuItem fx:id="menuscale8" mnemonicParsing="false" text="Scale" />
-                          <MenuItem fx:id="menumh8" mnemonicParsing="false" text="Mirror Horizontal" />
-                          <MenuItem fx:id="menumv8" mnemonicParsing="false" text="Mirror Vertical" />
-                          <MenuItem fx:id="menusepia8" mnemonicParsing="false" text="Sepia" />
-                          <MenuItem fx:id="menunoise8" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                      </items>
-                  </MenuButton>
-                  <MenuButton fx:id="menu9" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
-                      <items>
-                          <MenuItem fx:id="menurl9" mnemonicParsing="false" text="Rotate Right" />
-                          <MenuItem fx:id="menurl9" mnemonicParsing="false" text="Rotate Left" />
-                          <MenuItem fx:id="menuscale9" mnemonicParsing="false" text="Scale" />
-                          <MenuItem fx:id="menumh9" mnemonicParsing="false" text="Mirror Horizontal" />
-                          <MenuItem fx:id="menumv9" mnemonicParsing="false" text="Mirror Vertical" />
-                          <MenuItem fx:id="menusepia9" mnemonicParsing="false" text="Sepia" />
-                          <MenuItem fx:id="menunoise9" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
-                      </items>
-                  </MenuButton>
-               </children>
-            </GridPane>
-         </content>
-      </ScrollPane>
-   </children>
+    <children>
+        <ScrollPane prefHeight="400.0" prefWidth="602.0">
+            <content>
+                <GridPane gridLinesVisible="true" prefHeight="398.0" prefWidth="601.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <ImageView fx:id="img9" fitHeight="95.0" fitWidth="183.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <ImageView fx:id="img1" fitHeight="130.0" fitWidth="197.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" />
+                        <ImageView fx:id="img2" fitHeight="100.0" fitWidth="194.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" />
+                        <ImageView fx:id="img3" fitHeight="136.0" fitWidth="171.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" />
+                        <ImageView fx:id="img5" fitHeight="133.0" fitWidth="200.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <ImageView fx:id="img4" fitHeight="133.0" fitWidth="200.0" layoutX="10.0" layoutY="143.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="1" />
+                        <ImageView fx:id="img6" fitHeight="126.0" fitWidth="200.0" layoutX="10.0" layoutY="143.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <ImageView fx:id="img7" fitHeight="133.0" fitWidth="200.0" layoutX="411.0" layoutY="143.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.rowIndex="2" />
+                        <ImageView fx:id="img8" fitHeight="133.0" fitWidth="200.0" layoutX="10.0" layoutY="276.0" onMouseClicked="#onImgClicked" pickOnBounds="true" preserveRatio="true" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="button1" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onMouseClicked="#loadButton1" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" />
+                        <Button fx:id="button9" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton9" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                        <Button fx:id="button8" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton8" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                        <Button fx:id="button7" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton7" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.rowIndex="2" />
+                        <Button fx:id="button6" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton6" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                        <Button fx:id="button5" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton5" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Button fx:id="button4" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton4" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.rowIndex="1" />
+                        <Button fx:id="button3" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton3" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="2" />
+                        <Button fx:id="button2" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="64.0" mnemonicParsing="false" onMouseClicked="#loadButton2" prefHeight="25.0" prefWidth="200.0" text="Load" textAlignment="CENTER" visible="false" GridPane.columnIndex="1" />
+                        <Button fx:id="remove1" alignment="BOTTOM_LEFT" contentDisplay="TOP" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#removeImg1" text="X" visible="false" GridPane.valignment="TOP" />
+                        <Button fx:id="remove2" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg2" text="X" visible="false" GridPane.columnIndex="1" GridPane.valignment="TOP" />
+                        <Button fx:id="remove3" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg3" text="X" visible="false" GridPane.columnIndex="2" GridPane.valignment="TOP" />
+                        <Button fx:id="remove4" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg4" text="X" visible="false" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Button fx:id="remove5" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg5" text="X" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Button fx:id="remove6" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg6" text="X" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="TOP" />
+                        <Button fx:id="remove7" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg7" text="X" visible="false" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                        <Button fx:id="remove8" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg8" text="X" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                        <Button fx:id="remove9" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg9" text="X" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
+                        <MenuButton fx:id="menu1" mnemonicParsing="false" text="Edit" visible="false" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl1" mnemonicParsing="false" onAction="#applyRotateR1" text="Rotate Right" />
+                                <MenuItem fx:id="menurl1" mnemonicParsing="false" onAction="#applyRotateL1" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale1" mnemonicParsing="false" onAction="#applyScale1" text="Scale" />
+                                <MenuItem fx:id="menumh1" mnemonicParsing="false" onAction="#applyMirrorH1" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv1" mnemonicParsing="false" onAction="#applyMirrorV1" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia1" mnemonicParsing="false" onAction="#applySepia1" text="Sepia" />
+                                <MenuItem fx:id="menucontrast1" mnemonicParsing="false" onAction="#applyContrast1" text="Contrast" />
+                                <MenuItem fx:id="menunoise1" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton fx:id="menu2" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl2" mnemonicParsing="false" text="Rotate Right" />
+                                <MenuItem fx:id="menurl2" mnemonicParsing="false" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale2" mnemonicParsing="false" text="Scale" />
+                                <MenuItem fx:id="menumh2" mnemonicParsing="false" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv2" mnemonicParsing="false" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia2" mnemonicParsing="false" text="Sepia" />
+                                <MenuItem fx:id="menunoise2" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton fx:id="menu3" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl3" mnemonicParsing="false" text="Rotate Right" />
+                                <MenuItem fx:id="menurl3" mnemonicParsing="false" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale3" mnemonicParsing="false" text="Scale" />
+                                <MenuItem fx:id="menumh3" mnemonicParsing="false" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv3" mnemonicParsing="false" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia3" mnemonicParsing="false" text="Sepia" />
+                                <MenuItem fx:id="menunoise3" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton fx:id="menu4" mnemonicParsing="false" text="Edit" visible="false" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl4" mnemonicParsing="false" text="Rotate Right" />
+                                <MenuItem fx:id="menurl4" mnemonicParsing="false" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale4" mnemonicParsing="false" text="Scale" />
+                                <MenuItem fx:id="menumh4" mnemonicParsing="false" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv4" mnemonicParsing="false" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia4" mnemonicParsing="false" text="Sepia" />
+                                <MenuItem fx:id="menunoise4" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton fx:id="menu5" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl5" mnemonicParsing="false" text="Rotate Right" />
+                                <MenuItem fx:id="menurl5" mnemonicParsing="false" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale5" mnemonicParsing="false" text="Scale" />
+                                <MenuItem fx:id="menumh5" mnemonicParsing="false" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv5" mnemonicParsing="false" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia5" mnemonicParsing="false" text="Sepia" />
+                                <MenuItem fx:id="menunoise5" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton fx:id="menu6" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl6" mnemonicParsing="false" text="Rotate Right" />
+                                <MenuItem fx:id="menurl6" mnemonicParsing="false" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale6" mnemonicParsing="false" text="Scale" />
+                                <MenuItem fx:id="menumh6" mnemonicParsing="false" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv6" mnemonicParsing="false" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia6" mnemonicParsing="false" text="Sepia" />
+                                <MenuItem fx:id="menunoise6" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton fx:id="menu7" mnemonicParsing="false" text="Edit" visible="false" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl7" mnemonicParsing="false" text="Rotate Right" />
+                                <MenuItem fx:id="menurl7" mnemonicParsing="false" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale7" mnemonicParsing="false" text="Scale" />
+                                <MenuItem fx:id="menumh7" mnemonicParsing="false" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv7" mnemonicParsing="false" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia7" mnemonicParsing="false" text="Sepia" />
+                                <MenuItem fx:id="menunoise7" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton fx:id="menu8" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl8" mnemonicParsing="false" text="Rotate Right" />
+                                <MenuItem fx:id="menurl8" mnemonicParsing="false" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale8" mnemonicParsing="false" text="Scale" />
+                                <MenuItem fx:id="menumh8" mnemonicParsing="false" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv8" mnemonicParsing="false" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia8" mnemonicParsing="false" text="Sepia" />
+                                <MenuItem fx:id="menunoise8" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                        <MenuButton fx:id="menu9" mnemonicParsing="false" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM">
+                            <items>
+                                <MenuItem fx:id="menurl9" mnemonicParsing="false" text="Rotate Right" />
+                                <MenuItem fx:id="menurl9" mnemonicParsing="false" text="Rotate Left" />
+                                <MenuItem fx:id="menuscale9" mnemonicParsing="false" text="Scale" />
+                                <MenuItem fx:id="menumh9" mnemonicParsing="false" text="Mirror Horizontal" />
+                                <MenuItem fx:id="menumv9" mnemonicParsing="false" text="Mirror Vertical" />
+                                <MenuItem fx:id="menusepia9" mnemonicParsing="false" text="Sepia" />
+                                <MenuItem fx:id="menunoise9" mnemonicParsing="false" onAction="#applyNoise1" text="Noise" />
+                            </items>
+                        </MenuButton>
+                    </children>
+                </GridPane>
+            </content>
+        </ScrollPane>
+    </children>
 </AnchorPane>
