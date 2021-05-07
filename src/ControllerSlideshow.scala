@@ -1,3 +1,4 @@
+import BE.{QuadTree, Utils}
 import javafx.fxml.FXML
 import javafx.scene.control.{Button, MenuItem}
 import javafx.scene.image.{Image, ImageView}
