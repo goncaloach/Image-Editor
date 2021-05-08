@@ -1,7 +1,7 @@
 
 import javafx.fxml.{FXML, FXMLLoader}
 import javafx.scene.{Parent, Scene, SubScene}
-import javafx.scene.control.{Button, ColorPicker}
+import javafx.scene.control.{Button}
 import javafx.scene.layout.AnchorPane
 import javafx.stage.{Modality, Stage}
 

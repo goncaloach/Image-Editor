@@ -4,7 +4,7 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerGrid">
+<AnchorPane fx:id="anchor1" onMouseEntered="#inicializeExistingImages" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ControllerGrid">
    <children>
       <ScrollPane prefHeight="400.0" prefWidth="602.0">
          <content>
@@ -47,15 +47,6 @@
                   <Button fx:id="remove7" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg7" text="X" visible="false" GridPane.rowIndex="2" GridPane.valignment="TOP" />
                   <Button fx:id="remove8" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg8" text="X" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="TOP" />
                   <Button fx:id="remove9" alignment="TOP_LEFT" mnemonicParsing="false" onMouseClicked="#removeImg9" text="X" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="TOP" />
-                  <Button fx:id="edit1" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.valignment="BOTTOM" />
-                  <Button fx:id="edit2" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.valignment="BOTTOM" />
-                  <Button fx:id="edit3" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.valignment="BOTTOM" />
-                  <Button fx:id="edit4" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Button fx:id="edit5" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Button fx:id="edit6" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" GridPane.valignment="BOTTOM" />
-                  <Button fx:id="edit7" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Button fx:id="edit8" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
-                  <Button fx:id="edit9" layoutX="10.0" layoutY="118.0" mnemonicParsing="false" onMouseClicked="#onEdit" text="Edit" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="2" GridPane.valignment="BOTTOM" />
                </children>
             </GridPane>
          </content>
