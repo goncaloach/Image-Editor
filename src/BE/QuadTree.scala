@@ -275,12 +275,13 @@ object QuadTree {
     def truncateContrast(valor : Int):Int={  //truncate contrast value from -255 to 255
       Math.max(Math.min(255,valor),-255)
     }
-    def factor(contrast : Int):Int={
-      (259 * (contrast + 255)) / (255 * (259 - contrast))
+    def factor(contrast : Int):Double={
+      (259 * (contrast.toDouble + 255)) / (255 * (259 - contrast.toDouble))
     }
-    val newRed   = truncateColor(factor(truncateContrast(value)) * (clr.getRed   - 128) + 128)
-    val newGreen = truncateColor(factor(truncateContrast(value)) * (clr.getGreen - 128) + 128)
-    val newBlue  = truncateColor(factor(truncateContrast(value)) * (clr.getBlue  - 128) + 128)
+    val factorVal = factor(truncateContrast(value))
+    val newRed   = truncateColor((factorVal * (clr.getRed   - 128) + 128).toInt)
+    val newGreen = truncateColor((factorVal * (clr.getGreen - 128) + 128).toInt)
+    val newBlue  = truncateColor((factorVal * (clr.getBlue  - 128) + 128).toInt)
     new Color(newRed,newGreen,newBlue)
   }
 

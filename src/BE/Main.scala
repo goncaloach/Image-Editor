@@ -19,14 +19,14 @@ object Main {
     //val mirrorV = quad.mirrorV(qt)
 
     //val rotateR = quad.rotateR(qt)
-    val rotateL = quad.rotateL(qt)
+    //val rotateL = quad.rotateL(qt)
 
     //val sepia = quad.applySepia(qt)
-    //val contrast = quad.applyContrast(qt,256)
+    val contrast = quad.applyContrast(qt,200)
     //val noise = quad.applyNoise(qt)
     //val noisePure = quad.applyNoisePure(qt)
 
-    Utils.saveImage(rotateL,quad,"output")
+    Utils.saveImage(contrast,quad,"output")
 
   }
 

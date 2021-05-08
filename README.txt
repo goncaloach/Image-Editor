@@ -6,6 +6,8 @@ O utilizador pode substituir as imagens por outras a qualquer altura. Caso desej
 pode carregar no botão edit, que irá redirecionar o mesmo para uma window em que poderá adicionar as imagens a alterar 
 (File-New).
 Esta opção será util para visualizar várias imagens editadas que foram salvas ao mesmo tempo, comparando resultados.
+A "Grid" guarda o estado, as imagens que um utilizador pesquisar permaneceram mesmo que a aplicação seja reiniciada e até
+o utilizador apagar uma dada imagem.
 
 -A opção "Slideshow" permite visualizar quaisquer imagens adicionadas a partir de (File-New) e, pode ainda fazer edição as 
 mesmas. É possivel remover imagens e salvar imagens no estado atual.
