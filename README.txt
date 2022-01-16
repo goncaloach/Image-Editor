@@ -1,3 +1,9 @@
+Multiparadigm Programming Project (PPM) Project 
+·QuandTree implementation using recursion
+·Functional Programming
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 Guia de Utilização de "PPM Galery"
 
 -A opção "Grid" permite ao utilizador selecionar imagens especificas para serem apresentadas (que estejam na diretoria src/Images),
