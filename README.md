@@ -12,7 +12,7 @@ Implementation of an Image Editor with the images being stored as QuadTrees, and
   - Java
   
 
-## Guia de Utilização de "PPM Galery"
+## Guia de Utilização de "PPM Gallery"
 
 -A opção "Grid" permite ao utilizador selecionar imagens especificas para serem apresentadas (que estejam na diretoria src/Images),
 podendo trabalhar com um workspace de até 9 imagens ao mesmo tempo.
