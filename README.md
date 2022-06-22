@@ -4,7 +4,7 @@
 Implementation of an Image Editor with the images being stored as QuadTrees, and modified (rotation, filtering, etc.) using functional programming concepts. It also has a GUI for visualizing the images and applying effects to them.
 
 ## Specifications
-- Project done in a group of 6 people
+- Project done in a group of 2 people
 - Technologies used:
   - Scala
   - JavaFX
